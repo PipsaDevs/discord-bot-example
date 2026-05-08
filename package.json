@@ -1,0 +1,23 @@
+{
+  "name": "discord-bot-example",
+  "version": "1.0.0",
+  "description": "¡Un bot de Discord listo para usar!",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PipsaDevs/discord-bot-example.git"
+  },
+  "keywords": [
+    "discord",
+    "bot"
+  ],
+  "author": "PipsaDevs",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PipsaDevs/discord-bot-example/issues"
+  },
+  "homepage": "https://github.com/PipsaDevs/discord-bot-example#readme"
+}
