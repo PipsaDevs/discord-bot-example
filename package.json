@@ -2,6 +2,7 @@
 	"name": "discord-bot-example",
 	"version": "1.0.0",
 	"description": "¡Un bot de Discord listo para usar!",
+	"type": "module",
 	"main": "src/index.ts",
 	"scripts": {
 		"start": "node dist/src/index.js",
