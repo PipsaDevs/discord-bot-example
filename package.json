@@ -19,5 +19,21 @@
   "bugs": {
     "url": "https://github.com/PipsaDevs/discord-bot-example/issues"
   },
-  "homepage": "https://github.com/PipsaDevs/discord-bot-example#readme"
+  "homepage": "https://github.com/PipsaDevs/discord-bot-example#readme",
+  "devDependencies": {
+    "@types/node": "^25.6.2",
+    "@typescript-eslint/eslint-plugin": "^8.59.2",
+    "@typescript-eslint/parser": "^8.59.2",
+    "eslint": "^10.3.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "globals": "^17.6.0",
+    "nodemon": "^3.1.14",
+    "prettier": "^3.8.3",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.59.2"
+  },
+  "dependencies": {
+    "discord.js": "^14.26.4"
+  }
 }
