@@ -1,5 +1,9 @@
 import type LogType from '../enums/LogType.js';
 
+/**
+ * What does a log look like?
+ * This is what we define here
+ */
 export interface LogInterface {
 	type: LogType;
 	timeStamp: number;
