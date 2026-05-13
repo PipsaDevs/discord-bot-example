@@ -13,7 +13,7 @@ export type SlashCommandData =
 	| SlashCommandOptionsOnlyBuilder
 	| SlashCommandSubcommandsOnlyBuilder;
 
-export default interface SlashCommand {
+export interface SlashCommand {
 	data: SlashCommandData;
 	category: CommandCategory;
 	botPerms?: PermissionResolvable[];
