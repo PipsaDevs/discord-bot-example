@@ -2,6 +2,7 @@ import LogType from '../enums/LogType.js';
 import BoundedQueue from './BoundedQueue.js';
 import Log from './Log.js';
 import * as djs from 'discord.js';
+import { readdirSync } from 'fs';
 
 class Client extends djs.Client {
 	logs: BoundedQueue<Log>;
@@ -40,6 +41,24 @@ class Client extends djs.Client {
 				new Log(LogType.ERROR, Date.now(), err.message),
 			);
 		});
+	}
+
+	private async loadToCollection<K, V>(
+		dirName: string,
+		collection: djs.Collection<K, V>,
+		keySelector: (item: V) => K,
+	): Promise<void> {
+		const folders: string[] = readdirSync(`./src/${dirName}`);
+		for (const folder of folders) {
+			const files: string[] = readdirSync(`./src/${dirName}/${folder}`);
+			for (const file of files) {
+				const module = await import(
+					`../${dirName}/${folder}/${file.replace('ts', 'js')}`
+				);
+				const item: V = module.default;
+				collection.set(keySelector(item), item);
+			}
+		}
 	}
 
 	/**
