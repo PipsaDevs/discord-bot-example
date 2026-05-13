@@ -19,6 +19,9 @@ class Client extends djs.Client {
 		this.rest = new djs.REST({ version: '10' }).setToken(this.token);
 	}
 
+	/**
+	 * Attaches loggers for debug, warning and events
+	 */
 	private attachLogger(): void {
 		this.on('debug', (info: string) => {
 			console.debug(`[DEBUG] => ${info}`);
@@ -39,6 +42,9 @@ class Client extends djs.Client {
 		});
 	}
 
+	/**
+	 * Attaches the previous loggers and logs in the client
+	 */
 	async start(): Promise<void> {
 		this.attachLogger();
 		await this.login();
