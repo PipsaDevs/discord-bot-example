@@ -69,9 +69,14 @@ class Client extends djs.Client {
 	}
 
 	/**
-	 * Attaches the previous loggers and logs in the client
+	 * Attaches the previous loggers, loads the events and logs in the client.
 	 */
 	async start(): Promise<void> {
+		await this.loadToCollection(
+			'src/slash_commands',
+			this.slashCommands,
+			(cmd) => cmd.data.name,
+		);
 		this.attachLogger();
 		await this.login();
 	}
