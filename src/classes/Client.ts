@@ -62,7 +62,7 @@ class Client extends djs.Client {
 		for (let entry of files) {
 			entry = entry as Dirent<string>;
 			const mod = await import(
-				`../../${entry.parentPath}/${entry.name.replace('t', 'j')}`
+				`../../${entry.parentPath}/${entry.name.replace('ts', 'js')}`
 			);
 			const def: V = mod.default as V;
 			collection.set(keySelector(def), def);
