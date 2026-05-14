@@ -1,6 +1,7 @@
 import LogType from '../enums/LogType.js';
 import BoundedQueue from './BoundedQueue.js';
 import Log from './Log.js';
+import type { Event } from '../interfaces/Event.js';
 import type { SlashCommand } from '../interfaces/SlashCommand.js';
 import * as djs from 'discord.js';
 import type { Dirent } from 'fs';
@@ -77,6 +78,23 @@ class Client extends djs.Client {
 			this.slashCommands,
 			(cmd) => cmd.data.name,
 		);
+		const events = await scanDir('src/events');
+		for (let entry of events) {
+			entry = entry as Dirent<string>;
+			const mod = await import(
+				`../events/${entry.name.replace('ts', 'js')}`
+			);
+			const event: Event = mod.default;
+			if (event.once) {
+				this.once(event.name.toString(), async (...args: unknown[]) => {
+					await event.execute(...args, this);
+				});
+			} else {
+				this.on(event.name.toString(), async (...args: unknown[]) => {
+					await event.execute(...args, this);
+				});
+			}
+		}
 		this.attachLogger();
 		await this.login();
 	}
