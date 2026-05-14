@@ -18,7 +18,7 @@ export interface SlashCommand {
 	category: CommandCategory;
 	botPerms?: PermissionResolvable[];
 	userPerms?: PermissionResolvable[];
-	guildRequired: boolean;
+	guildRequired?: boolean;
 	execute: (
 		interaction: ChatInputCommandInteraction,
 		client: Client,
