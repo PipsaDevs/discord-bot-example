@@ -1,12 +1,13 @@
 import LogType from '../enums/LogType.js';
 import BoundedQueue from './BoundedQueue.js';
 import Log from './Log.js';
+import type { SlashCommand } from '../interfaces/SlashCommand.js';
 import * as djs from 'discord.js';
 import { readdirSync } from 'fs';
 
 class Client extends djs.Client {
 	logs: BoundedQueue<Log>;
-
+	slashCommands: djs.Collection<string, SlashCommand>;
 	constructor(logCapacity: number, token: string) {
 		super({
 			intents: [
@@ -18,6 +19,7 @@ class Client extends djs.Client {
 		this.logs = new BoundedQueue<Log>(logCapacity);
 		this.token = token;
 		this.rest = new djs.REST({ version: '10' }).setToken(this.token);
+		this.slashCommands = new djs.Collection();
 	}
 
 	/**
