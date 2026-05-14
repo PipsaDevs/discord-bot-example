@@ -46,6 +46,12 @@ class Client extends djs.Client {
 		});
 	}
 
+	/**
+	 * Load to a collection all files of a folder which have a default exported
+	 * @param dirName The directory (assuming)
+	 * @param collection The collection which will be used to store the elements
+	 * @param keySelector Function to determine the key of the value
+	 */
 	private async loadToCollection<K, V>(
 		dirName: string,
 		collection: djs.Collection<K, V>,
