@@ -9,7 +9,7 @@ Esto no es el fin del principio — Es el principio de un comienzo.
 
 ### Features (¿Qué hay nuevo?)
 En muy resumidas cuentas, en los pocos ratos libres que tenemos de universidad, me he dedicado a escribir:
-- La implementación de la clase [`BoundedQueue.ts`](src/classes/BoundedQueue.ts), que es esencialmente la implementación de lo que se conoce en Estructuras de Datos como una [_Cola limitada_](https://www.cs.cornell.edu/courses/cs4410/2010su/queue.pdf); Esta nos ha ayudado a implementar un (sistema de auditoría)[src/classes/Log.ts] que no consuma mucha memoria.
+- La implementación de la clase [`BoundedQueue.ts`](src/classes/BoundedQueue.ts), que es esencialmente la implementación de lo que se conoce en Estructuras de Datos como una [_Cola limitada_](https://www.cs.cornell.edu/courses/cs4410/2010su/queue.pdf); Esta nos ha ayudado a implementar un [sistema de auditoría](src/classes/Log.ts) que no consuma mucha memoria.
 - La implementación de interfaces esenciales como la de [`Event.ts`](src/interfaces/Event.ts), o la de [`SlashCommand.ts`](src/interfaces/SlashCommand.ts) (sneak peak btw).
 - Enums que dan estructura a las distintas interfaces.
 - Funciones de utilidad, como para [escanear directorios](src/util/scanDir.ts)
