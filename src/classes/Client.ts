@@ -3,7 +3,8 @@ import BoundedQueue from './BoundedQueue.js';
 import Log from './Log.js';
 import type { SlashCommand } from '../interfaces/SlashCommand.js';
 import * as djs from 'discord.js';
-import { readdirSync } from 'fs';
+import type { Dirent } from 'fs';
+import { scanDir } from '../util/scanDir.js';
 
 class Client extends djs.Client {
 	logs: BoundedQueue<Log>;
@@ -50,16 +51,14 @@ class Client extends djs.Client {
 		collection: djs.Collection<K, V>,
 		keySelector: (item: V) => K,
 	): Promise<void> {
-		const folders: string[] = readdirSync(`./src/${dirName}`);
-		for (const folder of folders) {
-			const files: string[] = readdirSync(`./src/${dirName}/${folder}`);
-			for (const file of files) {
-				const module = await import(
-					`../${dirName}/${folder}/${file.replace('ts', 'js')}`
-				);
-				const item: V = module.default;
-				collection.set(keySelector(item), item);
-			}
+		const files = await scanDir(dirName);
+		for (let entry of files) {
+			entry = entry as Dirent<string>;
+			const mod = await import(
+				`${entry.parentPath}/${entry.name.replace('t', 'j')}`
+			);
+			const def: V = mod.default as V;
+			collection.set(keySelector(def), def);
 		}
 	}
 
