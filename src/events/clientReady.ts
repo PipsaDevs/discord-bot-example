@@ -7,8 +7,7 @@ const clientReady: Event<[]> = {
 	async execute(client) {
 		client.emit(
 			'debug',
-			`\n\nReady, logged in as ${client?.user?.tag ?? 'null'} at ${client.readyAt}
-            `,
+			`Ready, logged in as ${client?.user?.tag ?? 'null'} at ${client.readyAt}`,
 		);
 		client.emit('debug', `Loaded ${client.slashCommands.size} commands`);
 	},
