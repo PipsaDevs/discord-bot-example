@@ -22,5 +22,10 @@
 		"moduleDetection": "force",
 		"skipLibCheck": true,
 	},
-	"exclude": ["eslint.config.mts"],
+	"include": ["src/**/*"],
+	"references": [
+		{
+			"path": "./tsconfig.node.json",
+		},
+	],
 }

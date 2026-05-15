@@ -18,7 +18,7 @@ const config: ConfigArray = [
 				...globals.node,
 			},
 			parserOptions: {
-				project: true,
+				projectService: true,
 				tsconfigRootDir: import.meta.dirname,
 			},
 		},
@@ -53,7 +53,7 @@ const config: ConfigArray = [
 		},
 	},
 	{
-		ignores: ['dist/**', 'node_modules/**', 'coverage/**'],
+		ignores: ['dist/**', 'node_modules/**'],
 	},
 ];
 
