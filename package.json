@@ -1,6 +1,6 @@
 {
-	"name": "discord-bot-example",
-	"version": "1.0.0",
+	"name": "discord-bot-template",
+	"version": "1.0.1",
 	"description": "¡Un bot de Discord listo para usar!",
 	"type": "module",
 	"main": "src/index.ts",
@@ -17,7 +17,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/PipsaDevs/discord-bot-example.git"
+		"url": "git+https://github.com/PipsaDevs/discord-bot-template.git"
 	},
 	"keywords": [
 		"discord",
@@ -31,7 +31,7 @@
 	"homepage": "https://github.com/PipsaDevs/discord-bot-example#readme",
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
-		"@types/node": "^25.6.2",
+		"@types/node": "^25.8.0",
 		"@typescript-eslint/eslint-plugin": "^8.59.2",
 		"@typescript-eslint/parser": "^8.59.2",
 		"eslint": "^10.3.0",

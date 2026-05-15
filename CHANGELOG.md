@@ -28,3 +28,14 @@ También un `README.md` porque, ¿qué sentido tiene un proyecto diseñado para 
 
 "ESTO ES MUY POGGERS XDXDXD"
 > @inteltank1, profesor de la UMA (no oficial) (sin contrato)
+
+## v1.0.1 - Errores del ~~directo~~ comienzo
+En muy pocas palabras, hemos arreglado un par de cosas de los archivos de configuración de TypeScript, y también hemos actualizado la url del repositorio en el paquete de npm. Cosillas que pasan, supongo.
+
+### Features (¿Qué hay nuevo?)
+- [`tsconfig.node.json`](./tsconfig.node.json), el archivo que nos ayuda a que la configuración de eslint no llore y se queje
+- Hemos actualizado los tipos de node
+
+### Bug fixes 
+- Actualizada la URL del repositorio en los archivos [`package.json`](./package.json) y [`package-lock.json`](./package-lock.json)
+- Ajustada la configuración del compilador de typescript para que el archivo de configuración de eslint no se sienta excluido XD
