@@ -1,5 +1,5 @@
 {
-	"name": "discord-bot-example",
+	"name": "discord-bot-template",
 	"version": "1.0.0",
 	"description": "¡Un bot de Discord listo para usar!",
 	"type": "module",
