@@ -1,14 +1,13 @@
-name: CI
+name: PR Checks
 
 on:
-    push:
-        branches: [master, dev]
     pull_request:
-        branches: [master, dev]
+        branches: [master]
+        types: [opened, synchronize, reopened]
 
 jobs:
-    lint-and-typecheck:
-        name: Lint, Format & Typecheck
+    quality-gate:
+        name: Quality Gate
         runs-on: ubuntu-latest
 
         steps:
@@ -30,5 +29,12 @@ jobs:
             - name: Format check
               run: npm run format:check
 
-            - name: Typecheck
+            - name: Typecheck & build
               run: npm run build
+
+            - name: Upload build artifact
+              uses: actions/upload-artifact@v4
+              with:
+                  name: dist-pr-${{ github.event.pull_request.number }}
+                  path: dist/
+                  retention-days: 3
