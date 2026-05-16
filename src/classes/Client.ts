@@ -131,6 +131,12 @@ class Client extends djs.Client {
 				}
 			}
 		}
+		for (const id of this.developers) {
+			this.emit(
+				'warn',
+				`User with ID ${id} is now considered a developer`,
+			);
+		}
 	}
 }
 
