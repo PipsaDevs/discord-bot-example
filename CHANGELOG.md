@@ -39,3 +39,28 @@ En muy pocas palabras, hemos arreglado un par de cosas de los archivos de config
 ### Bug fixes 
 - Actualizada la URL del repositorio en los archivos [`package.json`](./package.json) y [`package-lock.json`](./package-lock.json)
 - Ajustada la configuración del compilador de typescript para que el archivo de configuración de eslint no se sienta excluido XD
+
+## v1.1.0 - Ya llegaron ~~los reyes magos~~ soporte para interacciones
+Chat, nos lo estabais pidiendo (nadie ve este repositorio), y os lo hemos dado: ¡Soporte para interacciones!
+Sin más dilación, os cuento las nuevas features.
+
+### Features (¿Qué hay nuevo?)
+- Interfaz para los handlers de las interacciones [`InteractionHandler.ts`](src/interfaces/InteractionHandler.ts).
+- Soporte para el evento [`interactionCreate.ts`](src/events/interactionCreate.ts), que delega la interacción al correspondiente handler.
+- El handler de Slash Commands [`ChatInputCommand.ts`](src/interactions/handlers/ChatInputCommand.ts), que se encarga de gestionar los comandos de barra del bot.
+- Una nueva estructura de archivos. Ahora, en vez de solo haber una carpeta llamada "slash_commands", hay una carpeta llamada [`interactions`](src/interactions), que contiene handlers para los distintos tipos de interacciones, aparte de la ya conocida carpeta que contiene los comandos de barra.
+- La función de utilidad [`toError.ts`](src/util/toError.ts), que nos gestiona el dolor de cabeza que supone parsear el parametro de error en los bloques try-catch
+- La propiedad en la clase del cliente [`Client#developers`](src/classes/Client.ts#L18), que contiene las IDs de los desarrolladores registrados en el portal de desarrolladores (o las que incluyas tú en el constructor, vamos)
+- El esperado [`README.md`](README.md). Sé que _todavía_ no es el mejor, pero la carrera va antes :wilted_flower:
+
+### Bug fixes 
+Ninguno, porque no hay.
+
+### What's next? / ¿Qué va a ser lo siguiente?
+Probablemente mejorar el README.md, y añadir un script que despliegue los comandos del bot de manera global y en un servidor en especifico.
+
+> [!NOTE]
+> Ya puedes copiar este repositorio e intentar hacer cosas, pero todavía le faltan cosas a las interacciones, como por ejemplo, el script del despliegue.
+
+"Feliz año nuevo!11!!!1!1"
+> @CyRstudent a 22/07/2025, futuro ingeniero
