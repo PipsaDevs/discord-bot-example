@@ -6,9 +6,14 @@ import type { SlashCommand } from '../interfaces/SlashCommand.js';
 import * as djs from 'discord.js';
 import type { Dirent } from 'fs';
 import { scanDir } from '../util/scanDir.js';
+import type { InteractionHandler } from '../interfaces/InteractionHandler.js';
 
 class Client extends djs.Client {
 	logs: BoundedQueue<Log>;
+	interactionHandlers: djs.Collection<
+		djs.InteractionType,
+		InteractionHandler
+	>;
 	slashCommands: djs.Collection<string, SlashCommand>;
 	constructor(logCapacity: number, token: string) {
 		super({
@@ -21,6 +26,7 @@ class Client extends djs.Client {
 		this.logs = new BoundedQueue<Log>(logCapacity);
 		this.token = token;
 		this.rest = new djs.REST({ version: '10' }).setToken(this.token);
+		this.interactionHandlers = new djs.Collection();
 		this.slashCommands = new djs.Collection();
 	}
 
@@ -77,6 +83,11 @@ class Client extends djs.Client {
 			'src/interactions/slash_commands',
 			this.slashCommands,
 			(cmd) => cmd.data.name,
+		);
+		await this.loadToCollection(
+			'src/interactions/handlers',
+			this.interactionHandlers,
+			(handler) => handler.interactionType,
 		);
 		const events = await scanDir('src/events');
 		for (let entry of events) {
