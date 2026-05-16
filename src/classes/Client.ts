@@ -16,6 +16,12 @@ class Client extends djs.Client {
 	>;
 	slashCommands: djs.Collection<string, SlashCommand>;
 	developers: string[];
+	/**
+	 * Instantiates an object of class Client
+	 * @param logCapacity The capacity of the logs storage
+	 * @param token The token of your bot
+	 * @param developers An array of the ids of those whom you might consider as developers with access to developer-grade commands. If left empty, said array will be the owner(s) of the application
+	 */
 	constructor(logCapacity: number, token: string, developers?: string[]) {
 		super({
 			intents: [
