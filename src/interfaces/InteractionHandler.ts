@@ -1,7 +1,7 @@
 import type { Interaction, InteractionType } from 'discord.js';
 import type { Client } from '../classes/Client.js';
 
-export interface InteractionHandler {
+export interface InteractionHandler<T extends Interaction = Interaction> {
 	interactionType: InteractionType;
-	execute: (interaction: Interaction, client: Client) => Promise<void>;
+	execute: (interaction: T, client: Client) => Promise<void>;
 }
