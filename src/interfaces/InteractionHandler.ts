@@ -3,6 +3,5 @@ import type { Client } from '../classes/Client.js';
 
 export interface InteractionHandler {
 	interactionType: InteractionType;
-	defaultErrorHandling: boolean;
 	execute: (interaction: Interaction, client: Client) => Promise<void>;
 }
