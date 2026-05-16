@@ -74,7 +74,7 @@ class Client extends djs.Client {
 	 */
 	async start(): Promise<void> {
 		await this.loadToCollection(
-			'src/slash_commands',
+			'src/interactions/slash_commands',
 			this.slashCommands,
 			(cmd) => cmd.data.name,
 		);
