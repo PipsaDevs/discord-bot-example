@@ -15,7 +15,8 @@ class Client extends djs.Client {
 		InteractionHandler
 	>;
 	slashCommands: djs.Collection<string, SlashCommand>;
-	constructor(logCapacity: number, token: string) {
+	developers: string[];
+	constructor(logCapacity: number, token: string, developers?: string[]) {
 		super({
 			intents: [
 				djs.GatewayIntentBits.Guilds,
@@ -28,6 +29,7 @@ class Client extends djs.Client {
 		this.rest = new djs.REST({ version: '10' }).setToken(this.token);
 		this.interactionHandlers = new djs.Collection();
 		this.slashCommands = new djs.Collection();
+		this.developers = developers ?? [];
 	}
 
 	/**
@@ -108,6 +110,21 @@ class Client extends djs.Client {
 		}
 		this.attachLogger();
 		await this.login();
+
+		const app = await this.application!.fetch();
+		const owner = app.owner;
+
+		if (owner instanceof djs.User) {
+			if (!this.developers.includes(owner.id)) {
+				this.developers.unshift(owner.id);
+			}
+		} else if (owner instanceof djs.Team) {
+			for (const member of owner.members.values()) {
+				if (!this.developers.includes(member.id)) {
+					this.developers.push(member.id);
+				}
+			}
+		}
 	}
 }
 
