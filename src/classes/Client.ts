@@ -6,11 +6,23 @@ import type { SlashCommand } from '../interfaces/SlashCommand.js';
 import * as djs from 'discord.js';
 import type { Dirent } from 'fs';
 import { scanDir } from '../util/scanDir.js';
+import type { InteractionHandler } from '../interfaces/InteractionHandler.js';
 
 class Client extends djs.Client {
 	logs: BoundedQueue<Log>;
+	interactionHandlers: djs.Collection<
+		djs.InteractionType,
+		InteractionHandler
+	>;
 	slashCommands: djs.Collection<string, SlashCommand>;
-	constructor(logCapacity: number, token: string) {
+	developers: string[];
+	/**
+	 * Instantiates an object of class Client
+	 * @param logCapacity The capacity of the logs storage
+	 * @param token The token of your bot
+	 * @param developers An array of the ids of those whom you might consider as developers with access to developer-grade commands. If left empty, said array will be the owner(s) of the application
+	 */
+	constructor(logCapacity: number, token: string, developers?: string[]) {
 		super({
 			intents: [
 				djs.GatewayIntentBits.Guilds,
@@ -21,7 +33,9 @@ class Client extends djs.Client {
 		this.logs = new BoundedQueue<Log>(logCapacity);
 		this.token = token;
 		this.rest = new djs.REST({ version: '10' }).setToken(this.token);
+		this.interactionHandlers = new djs.Collection();
 		this.slashCommands = new djs.Collection();
+		this.developers = developers ?? [];
 	}
 
 	/**
@@ -74,9 +88,14 @@ class Client extends djs.Client {
 	 */
 	async start(): Promise<void> {
 		await this.loadToCollection(
-			'src/slash_commands',
+			'src/interactions/slash_commands',
 			this.slashCommands,
 			(cmd) => cmd.data.name,
+		);
+		await this.loadToCollection(
+			'src/interactions/handlers',
+			this.interactionHandlers,
+			(handler) => handler.interactionType,
 		);
 		const events = await scanDir('src/events');
 		for (let entry of events) {
@@ -97,6 +116,27 @@ class Client extends djs.Client {
 		}
 		this.attachLogger();
 		await this.login();
+
+		const app = await this.application!.fetch();
+		const owner = app.owner;
+
+		if (owner instanceof djs.User) {
+			if (!this.developers.includes(owner.id)) {
+				this.developers.unshift(owner.id);
+			}
+		} else if (owner instanceof djs.Team) {
+			for (const member of owner.members.values()) {
+				if (!this.developers.includes(member.id)) {
+					this.developers.push(member.id);
+				}
+			}
+		}
+		for (const id of this.developers) {
+			this.emit(
+				'warn',
+				`User with ID ${id} is now considered a developer`,
+			);
+		}
 	}
 }
 
